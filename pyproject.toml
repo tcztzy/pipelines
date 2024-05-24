@@ -1,0 +1,52 @@
+[project]
+name = "open-webui-pipelines"
+version = "0.1.0"
+description = "Open WebUI Pipeline"
+dependencies = [
+    "fastapi>=0.111.0",
+    "requests>=2.32.2",
+    "typer>=0.12.3",
+]
+readme = "README.md"
+requires-python = ">= 3.11, < 3.12.0a1"
+
+[project.optional-dependencies]
+dotenv = [
+    "python-dotenv>=1.0.1",
+]
+examples = [
+    "haystack-ai>=2.1.2",
+    "datasets>=2.19.1",
+    "sentence-transformers>=2.7.0",
+    "llama-cpp-python>=0.2.76",
+    "llama-index>=0.10.38",
+]
+
+[project.scripts]
+open-webui-pipelines = "open_webui.pipelines.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pytest>=8.2.1",
+    "pytest-cov>=5.0.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["open_webui"]
+
+[tool.ruff]
+extend-exclude = ["pipelines"]
+
+[tool.ruff.lint]
+select = ["I"]
+
+[tool.pytest.ini_options]
+addopts = ["--cov=open_webui"]
